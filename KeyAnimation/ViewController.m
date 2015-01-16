@@ -27,11 +27,6 @@
     [super viewDidLoad];
     
     [self.view addSubview:self.animationImageView];
-    
-    self.button = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.button.frame = CGRectMake(0, 20, 320, 80);
-    self.button.backgroundColor = [UIColor redColor];
-    [self.button addTarget:self action:@selector(buttonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.button];
 }
 
@@ -57,6 +52,25 @@
     }
     
     return _animationImageView;
+}
+
+- (UIButton *)button
+{
+    if (!_button)
+    {
+        _button = [UIButton buttonWithType:UIButtonTypeCustom];
+        _button.frame = CGRectMake(0,
+                                   20,
+                                   [[UIScreen mainScreen] bounds].size.width,
+                                   80);
+        _button.backgroundColor = [UIColor redColor];
+        
+        [_button addTarget:self
+                    action:@selector(buttonPressed)
+          forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return _button;
 }
 
 #pragma mark - ImageArray
@@ -108,7 +122,6 @@
 {
     if (flag)
     {
-        
         [self.animationImageView removeFromSuperview];
         self.animationImageView = nil;
         
